@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'menu/menu.dart';
 
 class HomeView extends StatefulWidget {
   const HomeView({super.key});
@@ -14,35 +15,8 @@ class _HomeViewState extends State<HomeView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.green,
-        title: const Text('My Wallet'),
-        actions: [
-          IconButton(
-            icon: const Icon(Icons.add),
-            onPressed: () {
-              // Acción para agregar
-            },
-          ),
-          
-        ],
-      ),
-      drawer: Drawer(
-        child: ListView(
-          children: [
-            const DrawerHeader(
-              decoration: BoxDecoration(color: Colors.green),
-              child: Text('Menú', style: TextStyle(color: Colors.white)),
-            ),
-            ListTile(
-              title: const Text('Opción 1'),
-              onTap: () {
-                // Acción para opción 1
-              },
-            ),
-          ],
-        ),
-      ),
+      appBar: const CustomAppBar(),
+      drawer: const CustomDrawer(),
       body: Column(
         children: [
           Padding(
@@ -111,7 +85,6 @@ class _HomeViewState extends State<HomeView> {
                   ],
                 ),
                 const SizedBox(height: 16),
-               
               ],
             ),
           ),

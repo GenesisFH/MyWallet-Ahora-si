@@ -22,6 +22,7 @@ class Logo extends StatelessWidget {
 // Welcome message component
 class WelcomeMessage extends StatelessWidget {
   const WelcomeMessage({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -117,10 +118,40 @@ class LoginScreen extends StatelessWidget {
                             await googleSignIn.signOut(); // Ensure no account is pre-selected
                             final GoogleSignInAccount? account = await googleSignIn.signIn(); // Prompt account selection
                             if (account != null) {
+                              if (!context.mounted) return;
                               // ignore: use_build_context_synchronously
                               final authProvider = Provider.of<AuthProvider>(context, listen: false);
                               final user = await authProvider.signInWithGoogleAccount(account);
                               if (context.mounted && user != null) {
+                                // Referencia al documento del usuario
+                                final userRef = FirebaseFirestore.instance.collection('users').doc(user.uid);
+                                
+                                // Verificar si el documento existe
+                                final userDoc = await userRef.get();
+                                
+                                if (!userDoc.exists) {
+                                  // Nuevo usuario - crear documento completo
+                                  await userRef.set({
+                                    'uid': user.uid,
+                                    'email': user.email,
+                                    'displayName': user.displayName,
+                                    'photoURL': user.photoURL,
+                                    'createdAt': FieldValue.serverTimestamp(), // Solo se establece en la primera creación
+                                    'lastLogin': FieldValue.serverTimestamp(),
+                                  });
+                                } else {
+                                  // Usuario existente - NO actualizar createdAt
+                                  await userRef.update({
+                                    'lastLogin': FieldValue.serverTimestamp(),
+                                    'photoURL': user.photoURL,
+                                    'displayName': user.displayName,
+                                    'email': user.email,
+                                  });
+                                }
+                                
+                                if (context.mounted) {
+                                  context.go('/home');
+                                }
                                 // Registrar o actualizar datos en Firestore
                                 await FirebaseFirestore.instance.collection('users').doc(user.uid).set({
                                   'email': user.email,
