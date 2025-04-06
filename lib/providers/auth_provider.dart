@@ -43,6 +43,7 @@ class AuthProvider with ChangeNotifier {
       );
       return userCredential.user;
     } catch (e) {
+      // ignore: avoid_print
       print('Error during registration: $e');
       return null;
     }
@@ -56,6 +57,7 @@ class AuthProvider with ChangeNotifier {
       );
       return userCredential.user;
     } catch (e) {
+      // ignore: avoid_print
       print('Error during email/password login: $e');
       return null;
     }
@@ -96,6 +98,7 @@ class AuthProvider with ChangeNotifier {
 
       return userCredential.user;
     } catch (e) {
+      // ignore: avoid_print
       print('Error during Google Sign-In: $e');
       return null;
     } finally {
@@ -118,6 +121,7 @@ class AuthProvider with ChangeNotifier {
           await FirebaseAuth.instance.signInWithCredential(credential);
       return userCredential.user;
     } catch (e) {
+      // ignore: avoid_print
       print('Error during Google sign-in: $e');
       return null;
     } finally {
@@ -130,6 +134,7 @@ class AuthProvider with ChangeNotifier {
       await _firebaseAuth.signOut();
       await GoogleSignIn().signOut(); // Ensure Google Sign-Out
     } catch (e) {
+      // ignore: avoid_print
       print('Error during sign-out: $e');
     }
   }
@@ -146,6 +151,7 @@ class AuthProvider with ChangeNotifier {
         'createdAt': FieldValue.serverTimestamp(),
       });
     } catch (e) {
+      // ignore: avoid_print
       print('Error saving user to database: $e');
     }
   }

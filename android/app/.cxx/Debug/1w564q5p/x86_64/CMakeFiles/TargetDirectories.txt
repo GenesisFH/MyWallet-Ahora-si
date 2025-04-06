@@ -1,0 +1,2 @@
+C:/Users/a2149/Documents/Desarollo de aplicaciones moviles/MyWallet Jazmin/MyWallet-Ahora-si/android/app/.cxx/Debug/1w564q5p/x86_64/CMakeFiles/edit_cache.dir
+C:/Users/a2149/Documents/Desarollo de aplicaciones moviles/MyWallet Jazmin/MyWallet-Ahora-si/android/app/.cxx/Debug/1w564q5p/x86_64/CMakeFiles/rebuild_cache.dir
