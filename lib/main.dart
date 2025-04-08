@@ -27,6 +27,5 @@ class MyApp extends StatelessWidget {
         routerConfig: AppRouter.router, // Use AppRouter for routing
       ),
     );
-
-}
+  }
 }
